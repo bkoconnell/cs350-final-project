@@ -11,7 +11,7 @@ This milestone builds off the milestone 2 software with the DHT (digitial humidi
 
 Milestone 4 source code: 
 
-Milestone 4 demo: 
+Milestone 4 demo: https://youtu.be/W_rE-gQg8Z8
 
 <br />
 
