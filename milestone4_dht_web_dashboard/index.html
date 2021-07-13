@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- HTML from StaticCanvas.html -- provided by SNHU (CS350)
+		data.json is an export from milestone4_v03.py -->
+<html>
+
+<head>
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript">
+
+		window.onload = function () {
+
+			// declare empty object for data points
+			let dataPointsTempF = [];
+			let dataPointsHumid = [];
+
+			// read-in data.json
+			$.getJSON("data.json", function (data) {
+
+				// iterate through json array to assign temperature data points
+				$.each(data, function (key, value) {
+					dataPointsTempF.push({ x: value[0], y: parseInt(value[1]) });
+				});
+				// web-browser console message for debug
+				console.log("Reading Temperature Data");
+				console.log(dataPointsTempF);
+
+				// iterate through json array to assign humidity data points
+				$.each(data, function (key, value) {
+					dataPointsHumid.push({ x: value[0], y: parseInt(value[2]) });
+				});
+				// web-browser console message for debug
+				console.log("Reading Humidty Data");
+				console.log(dataPointsHumid);
+
+				// create chart
+				var chart = new CanvasJS.Chart("chartContainer", {
+					title: { // chart title
+						text: "Plotting Temperature and Humidity"
+					},
+					data: [
+						{ // temperature data points as line chart
+							type: "line",
+							showInLegend: true,
+							name: "Temperature(F)",
+							dataPoints: dataPointsTempF
+						},
+						{ // humidity data points as step-line chart
+							type: "stepLine",
+							showInLegend: true,
+							name: "Humidity %",
+							dataPoints: dataPointsHumid
+						}
+					]
+				});
+				// render chart onto browser
+				chart.render();
+			});
+		}
+	</script>
+</head>
+
+<body>
+	<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+</body>
+
+</html>
